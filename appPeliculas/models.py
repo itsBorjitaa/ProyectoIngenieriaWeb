@@ -35,7 +35,7 @@ class Actor(models.Model):
 class Pelicula(models.Model):
     #campos
     titulo = models.CharField(max_length=120)
-    año = models.DateField()
+    fecha = models.DateField()
     url_imagen = models.URLField(blank=True, null=True)
     director = models.ForeignKey(Director, on_delete=models.CASCADE)
     actores = models.ManyToManyField(Actor)
