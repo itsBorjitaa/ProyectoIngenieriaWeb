@@ -1,7 +1,17 @@
 from django.shortcuts import render
-from django.shortcuts import HttpResponse
-
-# Create your views here.
+from .models import Pelicula, Director, Actor
 
 def index(request):
-        return HttpResponse('primera vista')
+        return render(request, 'index.html')
+
+def listaPeliculas(request):
+        peliculas = Pelicula.objects.all()
+        return render(request, 'listaPeliculas.html', {'peliculas': peliculas})
+
+def listaDirectores(request):
+        directores = Director.objects.all()
+        return render(request, 'listaDirectores.html', {'directores': directores})
+
+def listaActores(request):
+        actores = Actor.objects.all()
+        return render(request, 'listaActores.html', {'actores': actores})

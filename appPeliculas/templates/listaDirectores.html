@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de directores</title>
+</head>
+<body>
+    <h1>Directores</h1>
+    <ul>
+        {% for director in directores %}
+            <li>{{ director.nombre }} {{ director.apellidos }} <br>
+                <img src="{{director.url_imagen}}" alt="Imagen director" style="width: 190px; height: 260px;">
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
