@@ -9,9 +9,7 @@
     <h1>Actores</h1>
     <ul>
         {% for actor in actores %}
-            <li>{{ actor.nombre }} {{ actor.apellidos }} <br>
-                <img src="{{actor.url_imagen}}" alt="Imagen actor" style="width: 190px; height: 260px;">
-            </li>
+            <li><a href="{% url 'detalleActor' actor.id %}">{{ actor.nombre }} {{ actor.apellidos }}</a></li>
         {% endfor %}
     </ul>
 </body>

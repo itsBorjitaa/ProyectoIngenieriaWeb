@@ -9,9 +9,7 @@
     <h1>Directores</h1>
     <ul>
         {% for director in directores %}
-            <li>{{ director.nombre }} {{ director.apellidos }} <br>
-                <img src="{{director.url_imagen}}" alt="Imagen director" style="width: 190px; height: 260px;">
-            </li>
+            <li><a href="{% url 'detalleDirector' director.id %}">{{ director.nombre }} {{ director.apellidos }}</a></li>
         {% endfor %}
     </ul>
 </body>

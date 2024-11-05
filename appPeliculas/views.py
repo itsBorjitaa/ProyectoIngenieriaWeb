@@ -20,8 +20,10 @@ def detallePelicula(request, titulo):
         pelicula = get_object_or_404(Pelicula, titulo=titulo)
         return render(request, 'detallePelicula.html', {'pelicula': pelicula})
 
-def detalleDirector(request):
-        return render(request, 'detalleDirector.html')
+def detalleDirector(request, id):
+        director = get_object_or_404(Director, id=id)
+        return render(request, 'detalleDirector.html', {'director': director})
 
-def detalleActor(request):
-        return render(request, 'detalleActor.html')
+def detalleActor(request, id):
+        actor = get_object_or_404(Actor, id=id)
+        return render(request, 'detalleActor.html', {'actor': actor})
