@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import Pelicula, Director, Actor
 
 def index(request):
-        return render(request, 'index.html')
+        peliculas_destacadas = Pelicula.objects.order_by('-fecha')[:5]  #las 5 más recientes
+        return render(request, 'pruebaPlantilla.html', {'peliculas_destacadas': peliculas_destacadas})
 
 def listaPeliculas(request):
         peliculas = Pelicula.objects.all()
