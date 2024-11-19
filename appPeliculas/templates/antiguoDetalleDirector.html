@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de director</title>
+</head>
+<body>
+    <h1>{{ director.nombre }} {{ director.apellidos }}</h1>
+    <ul>
+        <img src="{{director.url_imagen}}" alt="Foto director" style="width: 190px; height: 260px;"> <br>
+        <li>Fecha nacimiento: {{ director.fechaNacimiento }}</li>
+        <li>Peliculas que dirige: </li>
+        <ul>
+            {% for pelicula in director.pelicula_set.all %}
+                <li><a href="{% url 'detallePelicula' pelicula.titulo %}">{{ pelicula.titulo }}</a> ({{ pelicula.fecha }})</li>
+                <a href="{% url 'detallePelicula' pelicula.titulo %}"><img src="{{pelicula.url_imagen}}" alt="Portada película" style="width: 190px; height: 260px;"></a> <br>
+            {% empty %}
+                <li>Este director no tiene películas registradas.</li>
+            {% endfor %}
+        </ul>
+    </ul>
+</body>
+</html>

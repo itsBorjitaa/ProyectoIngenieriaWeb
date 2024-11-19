@@ -2504,12 +2504,30 @@ input, select, textarea {
 
 /* Carousel */
 
-	.carousel {
-		position: relative;
-		overflow: hidden;
-		padding: 2em 0 2em 0;
-		margin-bottom: 0;
-	}
+.carousel {
+    position: relative;
+    overflow: hidden;
+    padding: 2em 0; /* Espacio arriba y abajo */
+    margin-bottom: 0;
+    text-align: center; /* Asegura que los elementos dentro se centren horizontalmente */
+}
+
+/* Estilo para el texto "Películas más recientes:" */
+.carousel p {
+    font-size: 2.5em; /* Tamaño de texto grande */
+    font-weight: bold; /* Texto en negrita */
+    color: #333; /* Color oscuro */
+    margin: 0 0 1.5em 0; /* Espacio en la parte inferior */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    letter-spacing: 0.1em; /* Espaciado entre letras */
+    font-family: 'Arial', sans-serif; /* Fuente moderna */
+}
+
+/* Agregar un efecto de hover sutil para el texto */
+.carousel p:hover {
+    color: #f7a800; /* Color anaranjado cuando pasa el ratón */
+    transition: color 0.3s ease; /* Transición suave para el cambio de color */
+}
 
 		.carousel .forward, .carousel .backward {
 			position: absolute;
