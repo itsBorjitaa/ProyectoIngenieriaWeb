@@ -1,8 +1,9 @@
-# SanmiFlix 🎬
+# SanmiFlix
+<div align="center">
+  <img src="appPeliculas/static/appPeliculas/assets/SanmiFlix.png" alt="Logo de SanmiFlix">
+</div>
 
 Bienvenido a **SanmiFlix**, una aplicación web que permite a los usuarios explorar películas, directores y actores, desarrollada con **Django**, **HTML**, **CSS** y **JavaScript**. Este proyecto combina una interfaz amigable con una sólida estructura backend para ofrecer una experiencia completa al usuario.
-
-![Logo de SanmiFlix](..\appPeliculas\assets\favicon.ico)
 
 ## Descripción
 
@@ -22,10 +23,3 @@ SanmiFlix es una plataforma diseñada para los amantes del cine. Ofrece una base
 - **Frontend**: HTML, CSS, JavaScript
 - **Bases de datos**: SQLite
 - **Otros**: ...
-
-## Instalación
-
-1. Clona el repositorio:
-   ```bash
-   git clone https://github.com/tuusuario/sanmiflix.git
-   cd sanmiflix
