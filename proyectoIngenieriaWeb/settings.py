@@ -123,3 +123,11 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+import os
+
+TWITTER_API_KEY = os.getenv("cS8PmNBRKKXsWe4QVeqeY3lqq")
+TWITTER_API_SECRET_KEY = os.getenv("7TMv6W4CKR5pzPXxX3yohXX3CrrxRDjqe47WE9oRpRrkIbM1yh")
+TWITTER_ACCESS_TOKEN = os.getenv("1859499698463309826-7RrrRm2ajCFLgh6hPVbMgRPcQcNqqs")
+TWITTER_ACCESS_TOKEN_SECRET = os.getenv("liDrorPAq4zeZf0HV6Z0t2vUIIzvDabhFx7Tonkgkb1VD")

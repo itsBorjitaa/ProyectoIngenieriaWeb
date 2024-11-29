@@ -9,4 +9,6 @@ urlpatterns = [
     path('peliculas/<str:titulo>/', views.detallePelicula, name='detallePelicula'),
     path('actores/<int:id>/', views.detalleActor, name='detalleActor'),
     path('directores/<int:id>/', views.detalleDirector, name='detalleDirector'),
+    path('api/posts/', views.obtenerPosts, name='obtenerPosts'),
+    path("tweets/", views.fetch_tweets, name="fetch_tweets"),
 ]
