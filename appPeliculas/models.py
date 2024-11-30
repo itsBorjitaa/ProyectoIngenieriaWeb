@@ -50,9 +50,25 @@ class Pelicula(models.Model):
     
 
 class Post(models.Model):
+    #campos
     titulo = models.CharField(max_length=200)
     contenido = models.TextField()
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
 
+    #metadata
+
+    #metodos
     def __str__(self):
         return self.titulo
+    
+
+class Suscriptor(models.Model):
+    #campos
+    email = models.EmailField(unique=True)
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+
+    #metadata
+
+    #metodos
+    def __str__(self):
+        return self.email

@@ -100,7 +100,7 @@
 				<div class="wrapper style2">
 
 					<article id="main" class="container special">
-						<a href="#" class="image featured"><img src="images/pic06.jpg" alt="" /></a>
+						<br><br><br>
 						<header>
 							<h2><a href="#">Acerca de SanmiFlix</a></h2>
 							<p>
@@ -115,8 +115,20 @@
 							comunidad y mantente al tanto de lo que más te gusta ver en SanmiFlix!
 						</p>
 						<footer>
-							<a href="#" class="button">Suscribete a la newsletter</a>
+							<form method="POST" class="form" action="">
+								{% csrf_token %}
+								{{ form.as_p }}
+								<button type="submit" class="button">Suscribirse a la newsletter</button>
+							</form>
+							{% if messages %}
+								<ul class="messages">
+									{% for message in messages %}
+										<li class="message">{{ message }}</li>
+									{% endfor %}
+								</ul>
+							{% endif %}
 						</footer>
+						
 					</article>
 
 				</div>

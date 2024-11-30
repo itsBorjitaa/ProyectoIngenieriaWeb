@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Pelicula, Director, Actor, Post
 from django.http import JsonResponse
 import requests
-import time
+from django.contrib import messages
+from .forms import FormularioSuscripcion
 
 # config twitter
 API_KEY = 'cS8PmNBRKKXsWe4QVeqeY3lqq'
@@ -10,7 +11,7 @@ API_SECRET_KEY = '7TMv6W4CKR5pzPXxX3yohXX3CrrxRDjqe47WE9oRpRrkIbM1yh'
 ACCESS_TOKEN = '1859499698463309826-7RrrRm2ajCFLgh6hPVbMgRPcQcNqqs'
 ACCESS_TOKEN_SECRET = 'liDrorPAq4zeZf0HV6Z0t2vUIIzvDabhFx7Tonkgkb1VD'
 
-def fetch_tweets(request):
+def obtenerTweets(request):
         # IDs de los tweets
         tweet_ids = "1859502697163989153,1859506489985003974"
         url = f"https://api.twitter.com/2/tweets?ids={tweet_ids}"
@@ -30,9 +31,24 @@ def obtenerPosts(request):
         posts = Post.objects.all().values('id','titulo','contenido','fecha_publicacion')
         return JsonResponse(list(posts), safe=False)
 
+
 def index(request):
-        peliculas_recientes = Pelicula.objects.order_by('-fecha')[:5]  #las 5 más recientes
-        return render(request, 'index.html', {'peliculas_recientes': peliculas_recientes})
+        peliculas_recientes = Pelicula.objects.order_by('-fecha')[:5]  # Las 5 más recientes
+
+        if request.method == 'POST':
+                form = FormularioSuscripcion(request.POST)
+                if form.is_valid():
+                        form.save()
+                        messages.success(request, 'Te has suscrito correctamente a nuestra newsletter.')
+                        return redirect('index')  # redirige a la pagina principal una vez hecho
+        else:
+                form = FormularioSuscripcion()
+
+        context = {
+                'peliculas_recientes': peliculas_recientes,
+                'form': form,
+        }
+        return render(request, 'index.html', context)
 
 def listaPeliculas(request):
         peliculas = Pelicula.objects.all()

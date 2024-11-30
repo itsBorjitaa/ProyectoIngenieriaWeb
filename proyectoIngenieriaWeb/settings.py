@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -125,9 +126,16 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-import os
-
 TWITTER_API_KEY = os.getenv("cS8PmNBRKKXsWe4QVeqeY3lqq")
 TWITTER_API_SECRET_KEY = os.getenv("7TMv6W4CKR5pzPXxX3yohXX3CrrxRDjqe47WE9oRpRrkIbM1yh")
 TWITTER_ACCESS_TOKEN = os.getenv("1859499698463309826-7RrrRm2ajCFLgh6hPVbMgRPcQcNqqs")
 TWITTER_ACCESS_TOKEN_SECRET = os.getenv("liDrorPAq4zeZf0HV6Z0t2vUIIzvDabhFx7Tonkgkb1VD")
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' #esto es para que llegue al email
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #esto es para que salga en consola
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'sanmiflix.contact@gmail.com' 
+EMAIL_HOST_PASSWORD = 'qkem oztw jujn aual' #esta es la contraseña de aplicación general proporcionada por google
