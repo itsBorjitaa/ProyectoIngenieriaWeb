@@ -4,6 +4,7 @@ from django.http import JsonResponse
 import requests
 from django.contrib import messages
 from .forms import FormularioSuscripcion
+from itertools import groupby
 
 # config twitter
 API_KEY = 'cS8PmNBRKKXsWe4QVeqeY3lqq'
@@ -13,7 +14,7 @@ ACCESS_TOKEN_SECRET = 'liDrorPAq4zeZf0HV6Z0t2vUIIzvDabhFx7Tonkgkb1VD'
 
 def obtenerTweets(request):
         # IDs de los tweets
-        tweet_ids = "1859502697163989153,1859506489985003974"
+        tweet_ids = "1859502697163989153,1859506489985003974,1862044186872049752"
         url = f"https://api.twitter.com/2/tweets?ids={tweet_ids}"
         headers = {
                 "Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAAAVixAEAAAAAnH8X2lhkdIkOdNU%2FEIHiEjv1LtI%3DEqB9SiPXWnaeZ2AeUF7jEElieeutYGjh4Ik1RLdzzAyS2iVDxv"
@@ -50,17 +51,37 @@ def index(request):
         }
         return render(request, 'index.html', context)
 
-def listaPeliculas(request):
-        peliculas = Pelicula.objects.all()
-        return render(request, 'listaPeliculas.html', {'peliculas': peliculas})
+def listaPeliculas(request, genero=None):
+        if genero:
+                genero = genero.replace('-', ' ').strip()
+                peliculas = Pelicula.objects.filter(genero__nombre__icontains=genero)
+        else:
+                peliculas = Pelicula.objects.all()
+        
+        # para agrupar y ordenar las peliculas por orden alfabetico
+        peliculasAgrupadas = {}
+        for key, group in groupby(peliculas, lambda p: p.titulo[0].upper()):
+                peliculasAgrupadas[key] = list(group)
+
+        return render(request, 'listaPeliculas.html', {'peliculasAgrupadas': peliculasAgrupadas, 'genero': genero})
 
 def listaDirectores(request):
-        directores = Director.objects.all()
-        return render(request, 'listaDirectores.html', {'directores': directores})
+        directores = Director.objects.all().order_by('nombre')  # para ordenar alfabéticamente
+        # para agrupar por la inicial del nombre
+        directoresAgrupados = {}
+        for key, group in groupby(directores, lambda d: d.nombre[0].upper()):
+                directoresAgrupados[key] = list(group)
+
+        return render(request, 'listaDirectores.html', {'directoresAgrupados': directoresAgrupados})
 
 def listaActores(request):
-        actores = Actor.objects.all()
-        return render(request, 'listaActores.html', {'actores': actores})
+        actores = Actor.objects.all().order_by('nombre')  # para ordenar alfabéticamente
+        # para agrupar por la inicial del nombre
+        actoresAgrupados = {}
+        for key, group in groupby(actores, lambda a: a.nombre[0].upper()):
+                actoresAgrupados[key] = list(group)
+
+        return render(request, 'listaActores.html', {'actoresAgrupados': actoresAgrupados})
 
 def detallePelicula(request, titulo):
         pelicula = get_object_or_404(Pelicula, titulo=titulo)

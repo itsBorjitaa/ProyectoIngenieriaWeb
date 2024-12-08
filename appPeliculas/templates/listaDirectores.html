@@ -38,28 +38,18 @@
 					<nav id="nav">
 						<ul>
 							<li><a href="/">Home</a></li>
+							<li><a href="{% url 'listaDirectores' %}">Directores</a></li>
 							<li>
-								<a href="{% url 'listaDirectores' %}">Directores</a>
-							</li>
-							<li>
-								<a href="{% url 'listaPeliculas' %}">Películas</a></a>
+								<a href="{% url 'listaPeliculas' %}">Películas</a>
 								<ul>
-									<li><a href="#">Terror</a></li>
-									<li><a href="#">Comedia</a></li>
-									<li><a href="#">Acción</a></li>
-									<li><a href="#">Drama</a></li>
-									<li><a href="#">Ciencia Ficción</a></li>
-									<li><a href="#">Fantasía</a></li>
-									<li><a href="#">Romance</a></li>
-									<li><a href="#">Documental</a></li>
-									<li><a href="#">Aventura</a></li>
-									<li><a href="#">Suspenso</a></li>
-									<li><a href="#">Animación</a></li>
+									<li><a href="{% url 'listaPeliculasGenero' genero='Terror' %}">Terror</a></li>
+									<li><a href="{% url 'listaPeliculasGenero' genero='Comedia' %}">Comedia</a></li>
+									<li><a href="{% url 'listaPeliculasGenero' genero='Acción' %}">Acción</a></li>
+									<li><a href="{% url 'listaPeliculasGenero' genero='Drama' %}">Drama</a></li>
+									<li><a href="{% url 'listaPeliculasGenero' genero='Ciencia-Ficción' %}">Ciencia Ficción</a></li>
 								</ul>
 							</li>
-							<li>
-								<a href="{% url 'listaActores' %}">Actores</a>
-							</li>
+							<li><a href="{% url 'listaActores' %}">Actores</a></li>
 						</ul>
 					</nav>
 					
@@ -76,37 +66,31 @@
 					</header>
 				</section>
 
-				<section class="carousel">
-					<p style="font-size: 2.5em; font-weight: 400; font-family: 'Source Sans Pro', sans-serif; color: #333; margin: 0 0 1.5em 0; text-transform: uppercase; letter-spacing: 0.1em; text-align: center; transition: color 0.3s ease;">
-						Directores más destacados
-					</p>
-					<div class="reel">
-						{% for pelicula in peliculas_destacadas %}
-						<article>
-							<a href="{% url 'detallePelicula' pelicula.titulo %}" class="image featured">
-								<img src="{{ pelicula.url_imagen }}" alt="{{ pelicula.titulo }}" />
-							</a>
-							<header>
-								<h3><a href="{% url 'detallePelicula' pelicula.titulo %}">{{ pelicula.titulo }}</a></h3>
-							</header>
-							<p>{{ pelicula.descripcion|truncatewords:20 }}</p>
-						</article>
-						{% endfor %}
-					</div>
-				</section>				
+				<br>	
 
 			<!-- Main -->
 				<div class="wrapper style2">
-
 					<article id="main" class="container special">
 						<h1>Directores</h1>
-                        <ul>
-                            {% for director in directores %}
-                                <li><a href="{% url 'detalleDirector' director.id %}">{{ director.nombre }} {{ director.apellidos }}</a></li>
-                            {% endfor %}
-                        </ul>
+						{% if directoresAgrupados %}
+							<ul>
+								{% for inicial, directores in directoresAgrupados.items %}
+									<li>
+										<h2>{{ inicial }}</h2>
+										<ul>
+											{% for director in directores %}
+												<li>
+													<a href="{% url 'detalleDirector' director.id %}">{{ director.nombre }} {{ director.apellidos }}</a>
+												</li>
+											{% endfor %}
+										</ul>
+									</li>
+								{% endfor %}
+							</ul>
+						{% else %}
+							<p>No se encontraron directores.</p>
+						{% endif %}
 					</article>
-
 				</div>
 
 			<!-- Footer -->

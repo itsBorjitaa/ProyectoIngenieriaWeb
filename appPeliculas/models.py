@@ -32,6 +32,18 @@ class Actor(models.Model):
         return self.nombre
     
 
+class Genero(models.Model):
+    #campos
+    nombre = models.CharField(max_length=50, unique=True)
+
+    #metadata
+    class Meta:
+        ordering = ["nombre"]
+
+    #metodos
+    def __str__(self):
+        return self.nombre
+
 class Pelicula(models.Model):
     #campos
     titulo = models.CharField(max_length=120)
@@ -39,6 +51,7 @@ class Pelicula(models.Model):
     url_imagen = models.URLField(blank=True, null=True)
     director = models.ForeignKey(Director, on_delete=models.CASCADE)
     actores = models.ManyToManyField(Actor)
+    genero = models.ManyToManyField(Genero)
 
     #metadata
     class Meta:
