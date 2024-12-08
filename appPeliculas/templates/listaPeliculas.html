@@ -69,34 +69,49 @@
 			<br>
 
 			<!-- Main -->
-				<div class="wrapper style2">
-					<article id="main" class="container special">
-						{% if genero %}
-							<h1>Películas de {{ genero }}</h1>
-						{% else %}
-							<h1>Todas las Películas</h1>
-						{% endif %}
-						
-						{% if peliculasAgrupadas %}
-							<ul>
-								{% for inicial, peliculas in peliculasAgrupadas.items %}
-									<li>
-										<h2>{{ inicial }}</h2>
-										<ul>
-											{% for pelicula in peliculas %}
-												<li>
-													<a href="{% url 'detallePelicula' pelicula.titulo %}">{{ pelicula.titulo }}</a>
-												</li>
-											{% endfor %}
-										</ul>
-									</li>
+			<div class="wrapper style2">
+				<article id="main" class="container special">
+					{% if genero %}
+						<h1 style="text-align: center; font-size: 3em; font-weight: bold; margin-top: 20px; margin-bottom: 20px; color: #333;">
+							Películas de {{ genero }}
+						</h1>
+					{% else %}
+						<h1 style="text-align: center; font-size: 3em; font-weight: bold; margin-top: 20px; margin-bottom: 20px; color: #333;">
+							Todas las Películas
+						</h1>
+					{% endif %}
+					
+					{% if peliculasAgrupadas %}
+						<div class="row gtr-50">
+							{% for inicial, peliculas in peliculasAgrupadas.items %}
+								<div class="col-12">
+									<h2>{{ inicial }}</h2>
+								</div>
+								{% for pelicula in peliculas %}
+									<div class="col-4 col-12-mobile">
+										<section class="card">
+											<a href="{% url 'detallePelicula' pelicula.titulo %}">
+												<img src="{{ pelicula.url_imagen }}" alt="{{ pelicula.titulo }}" class="image fit">
+											</a>
+											<header>
+												<h3>{{ pelicula.titulo }}</h3>
+											</header>
+											<p>
+												{{ pelicula.descripcion|truncatewords:20 }}
+											</p>
+											<footer>
+												<a href="{% url 'detallePelicula' pelicula.titulo %}" class="button small">Detalles</a>
+											</footer>
+										</section>
+									</div>
 								{% endfor %}
-							</ul>
-						{% else %}
-							<p>No se encontraron películas{% if genero %} de {{ genero }}{% endif %}.</p>
-						{% endif %}
-					</article>
-				</div>
+							{% endfor %}
+						</div>
+					{% else %}
+						<p>No se encontraron películas{% if genero %} de {{ genero }}{% endif %}.</p>
+					{% endif %}
+				</article>
+			</div>
 
 			<!-- Footer -->
 				<div id="footer">
@@ -122,34 +137,7 @@
 									<!-- aquí se cargan los posts de la base de datos dinámicamente-->
 								</ul>
 							</section>
-
-							<!-- Photos -->
-								<section class="col-4 col-12-mobile">
-									<header>
-										<h2 class="icon solid fa-camera circled"><span class="label">Photos</span></h2>
-									</header>
-									<div class="row gtr-25">
-										<div class="col-6">
-											<a href="#" class="image fit"><img src="images/pic10.jpg" alt="" /></a>
-										</div>
-										<div class="col-6">
-											<a href="#" class="image fit"><img src="images/pic11.jpg" alt="" /></a>
-										</div>
-										<div class="col-6">
-											<a href="#" class="image fit"><img src="images/pic12.jpg" alt="" /></a>
-										</div>
-										<div class="col-6">
-											<a href="#" class="image fit"><img src="images/pic13.jpg" alt="" /></a>
-										</div>
-										<div class="col-6">
-											<a href="#" class="image fit"><img src="images/pic14.jpg" alt="" /></a>
-										</div>
-										<div class="col-6">
-											<a href="#" class="image fit"><img src="images/pic15.jpg" alt="" /></a>
-										</div>
-									</div>
-								</section>
-
+							
 						</div>
 						<hr />
 						<div class="row">
@@ -162,7 +150,7 @@
 										</header>
 										<p>Contacta con nosotros a través de nuestras diferentes redes:</p>
 										<ul class="icons">
-											<li><a href="https://twitter.com" class="icon brands fa-twitter"><span class="label">X</span></a></li>
+											<li><a href="https://twitter.com/SanmiFlix" class="icon brands fa-twitter"><span class="label">X</span></a></li>
 											<li><a href="https://facebook.com" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 											<li><a href="https://instagram.com" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 										</ul>
